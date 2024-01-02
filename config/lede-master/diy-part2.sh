@@ -68,12 +68,28 @@ echo "DISTRIB_SOURCECODE='lede'" >>package/base-files/files/etc/openwrt_release
 #git branch --set-upstream-to=origin/master master
 #cd ../..
 
+# Clone 项目
+mkdir package/luci-app-openclash
+cd package/luci-app-openclash
+git init
+git remote add -f origin https://github.com/vernesong/OpenClash.git
+git config core.sparsecheckout true
+echo "luci-app-openclash" >> .git/info/sparse-checkout
+git pull --depth 1 origin master
+git branch --set-upstream-to=origin/master master
+
+# 编译 po2lmo (如果有po2lmo可跳过)
+pushd luci-app-openclash/tools/po2lmo
+make && sudo make install
+popd
+cd ../..
+
 ## 下载OpenClash
-wget https://github.com/vernesong/OpenClash/archive/master.zip
+##wget https://github.com/vernesong/OpenClash/archive/master.zip
 ## 解压
-unzip master.zip
+##unzip master.zip
 ## 复制OpenClash软件包到OpenWrt
-cp -r OpenClash-master/luci-app-openclash package
+##cp -r OpenClash-master/luci-app-openclash package
 
 
 # 删除自定义源默认的 argon 主题
