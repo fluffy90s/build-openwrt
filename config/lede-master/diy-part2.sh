@@ -77,6 +77,8 @@ unzip master.zip
 ## 复制OpenClash软件包到OpenWrt
 cp -r OpenClash-master/luci-app-openclash package
 
+## 下载dl库upx-3.9.6
+wget https://github.com/upx/upx/releases/download/v3.96/upx-3.96-src.tar.xz dl/upx-3.96.tar.xz
 
 # 删除自定义源默认的 argon 主题
 rm -rf package/lean/luci-theme-argon
