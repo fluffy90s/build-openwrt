@@ -80,7 +80,8 @@ cp -r OpenClash-master/luci-app-openclash package
 ## 下载dl库upx-3.9.6
 mkdir dl
 wget -O "dl/upx-3.96.tar.xz"  https://github.com/upx/upx/releases/download/v3.96/upx-3.96-src.tar.xz 
-
+sed -i '/TARGET_LDFLAGS += -lubox -lubus/i\TARGET_CFLAGS += -ffunction-sections -fdata-sections -flto' package/network/services/hostapd/Makefile
+sed -i '/TARGET_LDFLAGS += -lubox -lubus/i\TARGET_LDFLAGS += -Wl,--gc-sections -flto=jobserver -fuse-linker-plugin' package/network/services/hostapd/Makefile
 # 删除自定义源默认的 argon 主题
 rm -rf package/lean/luci-theme-argon
 
